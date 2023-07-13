@@ -51,6 +51,14 @@ function TestFourComponent() {
     )
 }
 
+function TestFiveComponent() {
+    return (
+        <div>
+            <p data-custom="value" className="primary-text">Modern Testing</p>
+        </div>
+    )
+}
+
 // it("should render the element correctly", () => {
 //     render(<TestTwoComponent />);
 //     // const element = screen.getByDisplayValue("Modern testing");
@@ -129,8 +137,11 @@ it("should render the element correctly", async () => {
 
     // expect(element).toBeInTheDocument();
     // expect(elementShouldNotExist).not.toBeInTheDocument();
-    await waitFor(() => {
-        expect(screen.getByText("Emre")).toBeInTheDocument();
-    })
-    await waitForElementToBeRemoved(() => screen.getByText("can"))
+    // await waitFor(() => {
+    //     expect(screen.getByText("Emre")).toBeInTheDocument();
+    // })
+    // await waitForElementToBeRemoved(() => screen.getByText("can"));
+    const { container } = render(<TestFiveComponent />);
+    const element = container.querySelector("[data-custom='value']");
+    expect(element).toBeInTheDocument();
 })
