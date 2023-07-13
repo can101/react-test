@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react"
+import { useEffect, useState } from "react"
 
 function TestComponent() {
     return (
@@ -29,11 +30,25 @@ function TestTwoComponent({ products }) {
 }
 
 function TestThreeComponent({ suffix }) {
-    return (<div>Modern Testing: 
+    return (<div>Modern Testing:
         {/* {suffix ? suffix : 'Suffix yok'} */}
         {!suffix && <p>Suffix yok</p>}
         {suffix && <p>{suffix}</p>}
     </div>)
+}
+
+function TestFourComponent() {
+    const [message, setMessage] = useState("can");
+    useEffect(() => {
+        setTimeout(() => {
+            setMessage("Emre")
+        }, 300)
+    }, [])
+    return (
+        <div>
+            <p>{message}</p>
+        </div>
+    )
 }
 
 // it("should render the element correctly", () => {
@@ -91,5 +106,15 @@ it("should render the element correctly", () => {
     const emptyElement = screen.queryByText("Suffix yok");
 
     expect(emptyElement).not.toBeInTheDocument();
+    expect(element).toBeInTheDocument();
+})
+
+it("should render the element correctly", async () => {
+    render(<TestFourComponent />);
+
+    const element = await screen.findByText(/Emre/i, {
+        exact: false
+    });
+
     expect(element).toBeInTheDocument();
 })
