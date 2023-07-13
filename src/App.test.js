@@ -3,12 +3,14 @@ import App from './App';
 
 it("should render App component without crashing", () => {
   render(<App />)
-  expect(screen.getByText("Modern Testing")).toBeInTheDocument();
+  const element = screen.getByText("Modern Testing");
+  expect(element).toBeInTheDocument();//Matchers
 })
 
 it("should render button component", () => {
   render(<App />)
-  expect(screen.getByText("Button")).toBeInTheDocument();
+  const element = screen.getByText("Button");
+  expect(element).toBeInTheDocument();//Matchers
 })
 
 // test('renders learn react link', () => {
