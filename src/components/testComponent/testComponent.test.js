@@ -142,6 +142,7 @@ it("should render the element correctly", async () => {
     // })
     // await waitForElementToBeRemoved(() => screen.getByText("can"));
     const { container } = render(<TestFiveComponent />);
+    screen.debug()
     const element = container.querySelector("[data-custom='value']");
     expect(element).toBeInTheDocument();
 })
