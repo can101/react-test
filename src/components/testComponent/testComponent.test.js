@@ -28,6 +28,10 @@ function TestTwoComponent({ products }) {
     )
 }
 
+function TestThreeComponent({ suffix }) {
+    return <div>Modern Testing: {suffix}</div>
+}
+
 
 // it("should render the element correctly", () => {
 //     render(<TestTwoComponent />);
@@ -57,9 +61,22 @@ it("should render the element correctly", () => {
 })
 
 it("should render the element correctly", () => {
-    const products=["product-1","product-2","product-3"];
-    render(<TestTwoComponent products={products}/>);
+    const products = ["product-1", "product-2", "product-3"];
+    render(<TestTwoComponent products={products} />);
     const elements = screen.getAllByRole("listitem");
     // expect(elements).toHaveLength(3);
     expect(elements.length).toBe(3);
+})
+
+it("should render the element correctly", () => {
+    render(<TestThreeComponent suffix={"Test"}/>);
+
+    const element = screen.getByText(/ern/i, {
+        exact: false
+    });
+    // const element = screen.getByText("Mern Testing");
+    // const element = screen.getByText("ern Testing", {
+    //     exact: false,
+    // });
+    expect(element).toBeInTheDocument();
 })
