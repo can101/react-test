@@ -9,6 +9,21 @@ function TestComponent() {
     )
 }
 
+function TestTwoComponent() {
+    return (
+        <>
+            <label htmlFor="user-name">User Name:</label>
+            <input id="user-name" />
+        </>
+    )
+}
+
+it("should render the element correctly", () => {
+    render(<TestTwoComponent />);
+    const element = screen.getByLabelText("User Name:");
+    expect(element).toBeInTheDocument();
+})
+
 it("should render the element correctly", () => {
     render(<TestComponent />);
     const element = screen.getByRole("button", {
