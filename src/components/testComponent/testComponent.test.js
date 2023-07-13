@@ -29,9 +29,12 @@ function TestTwoComponent({ products }) {
 }
 
 function TestThreeComponent({ suffix }) {
-    return <div>Modern Testing: {suffix}</div>
+    return (<div>Modern Testing: 
+        {/* {suffix ? suffix : 'Suffix yok'} */}
+        {!suffix && <p>Suffix yok</p>}
+        {suffix && <p>{suffix}</p>}
+    </div>)
 }
-
 
 // it("should render the element correctly", () => {
 //     render(<TestTwoComponent />);
@@ -69,7 +72,7 @@ it("should render the element correctly", () => {
 })
 
 it("should render the element correctly", () => {
-    render(<TestThreeComponent suffix={"Test"}/>);
+    render(<TestThreeComponent suffix={"Test"} />);
 
     const element = screen.getByText(/ern/i, {
         exact: false
@@ -78,5 +81,15 @@ it("should render the element correctly", () => {
     // const element = screen.getByText("ern Testing", {
     //     exact: false,
     // });
+    expect(element).toBeInTheDocument();
+})
+
+it("should render the element correctly", () => {
+    render(<TestThreeComponent suffix={"Test"} />);
+
+    const element = screen.getByText("Test");
+    const emptyElement = screen.queryByText("Suffix yok");
+
+    expect(emptyElement).not.toBeInTheDocument();
     expect(element).toBeInTheDocument();
 })
