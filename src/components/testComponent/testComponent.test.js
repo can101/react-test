@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react"
+import { render, screen, waitFor } from "@testing-library/react"
 import { useEffect, useState } from "react"
 
 function TestComponent() {
@@ -117,4 +117,22 @@ it("should render the element correctly", async () => {
     });
 
     expect(element).toBeInTheDocument();
+})
+
+it("should render the element correctly", async () => {
+    render(<TestFourComponent />);
+
+    // const element = await screen.findByText(/Emre/i, {
+    //     exact: false
+    // });
+    // const elementShouldNotExist = screen.queryByText("can");
+
+    // expect(element).toBeInTheDocument();
+    // expect(elementShouldNotExist).not.toBeInTheDocument();
+    await waitFor(()=>{
+        expect(screen.getByText("can")).toBeInTheDocument();
+    })
+    await waitFor(()=>{
+        expect(screen.getByText("Emre")).not.toBeInTheDocument();
+    })
 })
