@@ -15,7 +15,8 @@ function TestTwoComponent() {
             {/* <label htmlFor="user-name">User Name:</label>
             <input id="user-name" /> */}
             {/* <input placeholder="Enter your username" /> */}
-            Modern testing
+            {/* Modern testing */}
+            <input defaultValue={"Modern testing"}/>
         </>
     )
 }
@@ -23,7 +24,8 @@ function TestTwoComponent() {
 
 it("should render the element correctly", () => {
     render(<TestTwoComponent />);
-    const element = screen.getByText("Modern testing");
+    const element = screen.getByDisplayValue("Modern testing");
+    // const element = screen.getByText("Modern testing");
     // const element = screen.getByPlaceholderText("Enter your username");
     expect(element).toBeInTheDocument();
 })
