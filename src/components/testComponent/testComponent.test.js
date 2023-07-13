@@ -12,17 +12,24 @@ function TestComponent() {
 function TestTwoComponent() {
     return (
         <>
-            <label htmlFor="user-name">User Name:</label>
-            <input id="user-name" />
+            {/* <label htmlFor="user-name">User Name:</label>
+            <input id="user-name" /> */}
+            <input placeholder="Enter your username" />
         </>
     )
 }
 
+
 it("should render the element correctly", () => {
     render(<TestTwoComponent />);
-    const element = screen.getByLabelText("User Name:");
+    const element = screen.getByPlaceholderText("Enter your username");
     expect(element).toBeInTheDocument();
 })
+// it("should render the element correctly", () => {
+//     render(<TestTwoComponent />);
+//     const element = screen.getByLabelText("User Name:");
+//     expect(element).toBeInTheDocument();
+// })
 
 it("should render the element correctly", () => {
     render(<TestComponent />);
