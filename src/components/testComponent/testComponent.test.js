@@ -9,7 +9,7 @@ function TestComponent() {
     )
 }
 
-function TestTwoComponent() {
+function TestTwoComponent({ products }) {
     return (
         <>
             {/* <label htmlFor="user-name">User Name:</label>
@@ -19,26 +19,29 @@ function TestTwoComponent() {
             {/* <input defaultValue={"Modern testing"}/> */}
             {/* <img src="#"  alt="Modern testing"/> */}
             {/* <div title="MODERN">Modern</div> */}
-            <div data-testid="example">Modern</div>
-            <div data-testid="example2">Modern</div>
+            {/* <div data-testid="example">Modern</div>
+            <div data-testid="example2">Modern</div> */}
+            <ul>
+                {products.map((product, index) => <li key={index}>{product}</li>)}
+            </ul>
         </>
     )
 }
 
 
-it("should render the element correctly", () => {
-    render(<TestTwoComponent />);
-    // const element = screen.getByDisplayValue("Modern testing");
-    // const element = screen.getByTitle("MODERN");
-    const element = screen.getByTestId("example");
-    const element2 = screen.getByTestId("example2");
-    // const element = screen.getAllByAltText("Modern testing");
-    // const element = screen.getByText("Modern testing");
-    // const element = screen.getByPlaceholderText("Enter your username");
-    expect(element).toBeInTheDocument();
-    expect(element2).toBeInTheDocument();
-    // expect(element.src).toBe("#");
-})
+// it("should render the element correctly", () => {
+//     render(<TestTwoComponent />);
+//     // const element = screen.getByDisplayValue("Modern testing");
+//     // const element = screen.getByTitle("MODERN");
+//     const element = screen.getByTestId("example");
+//     const element2 = screen.getByTestId("example2");
+//     // const element = screen.getAllByAltText("Modern testing");
+//     // const element = screen.getByText("Modern testing");
+//     // const element = screen.getByPlaceholderText("Enter your username");
+//     expect(element).toBeInTheDocument();
+//     expect(element2).toBeInTheDocument();
+//     // expect(element.src).toBe("#");
+// })
 // it("should render the element correctly", () => {
 //     render(<TestTwoComponent />);
 //     const element = screen.getByLabelText("User Name:");
@@ -51,4 +54,12 @@ it("should render the element correctly", () => {
         name: "Test"
     });
     expect(element).toBeInTheDocument();
+})
+
+it("should render the element correctly", () => {
+    const products=["product-1","product-2","product-3"];
+    render(<TestTwoComponent products={products}/>);
+    const elements = screen.getAllByRole("listitem");
+    // expect(elements).toHaveLength(3);
+    expect(elements.length).toBe(3);
 })
