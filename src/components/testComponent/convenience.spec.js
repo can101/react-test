@@ -40,5 +40,5 @@ it("Should render the element correctly", async () => {
     //     wrapper:WrapperComponent
     // })
     customRender(<TestComponent />)
-    screen.debug()
+    // screen.debug()
 })
